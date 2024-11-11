@@ -1,0 +1,10 @@
+server {
+  listen 80;
+  listen [::]:80;
+  root /var/www/rocio2_web/html;
+  index index.html index.htm index.nginx-debian.html;
+  server_name rconcan2.com www.rconcan2.com;
+  location / {
+  try_files $uri $uri/ =404;
+  }
+}
