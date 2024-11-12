@@ -5,12 +5,14 @@
     #192.168.57.102 rconcan.com www.rconcan2.com
     #192.168.57.102 rconcan2.com www.rconcan2.com
 
+!/bin/bash
+
 #CONFIGURACIÓN GENERAL DEL SERVIDOR Y REPOSITORIOS
 
 #Actualizar repositorios e instalar el servidor Nginx
     sudo apt update 
-    sudo apt install nginx
-    sudo apt install git
+    sudo apt install -y nginx
+    sudo apt install -y git
  #comprobar el funcionamiento de nginx
     sudo systemctl status nginx
 
@@ -27,21 +29,23 @@
      sudo chmod -R 755 /var/www/rocio_web
 
 #Creación del archivo y del enlace simbólico
-    sudo bash -c 'cat > /etc/nginx/sites-available/rconcan <<EOF
-        server {
-            listen 80;
-            listen [::]:80;
-            root /var/www/rocio_web/html/static-website-example/;
-            index index.html index.htm index.nginx-debian.html;
-            server_name rconcan;
-            location / {
-                try_files $uri $uri/ =404;
-            }
-        }
-    EOF'
+    # sudo bash -c 'cat > /etc/nginx/sites-available/rconcan <<EOF
+    #     server {
+    #         listen 80;
+    #         listen [::]:80;
+    #         root /var/www/rocio_web/html/static-website-example/;
+    #         index index.html index.htm index.nginx-debian.html;
+    #         server_name rconcan;
+    #         location / {
+    #             try_files $uri $uri/ =404;
+    #         }
+    #     }
+    # EOF'
+
+    cp /vagrant/conf/rconcan /etc/nginx/sites-available/rconcan
 
     #Enlace simbólico
-     sudo ln -s /etc/nginx/sites-available/rocio_web /etc/nginx/sites-enabled/
+     sudo ln -sf /etc/nginx/sites-available/rconcan /etc/nginx/sites-enabled/
 
 
 #Reinicia el servidor para aplicar la nueva configuración
@@ -57,23 +61,28 @@
      sudo chmod -R 755 /var/www/rocio2_web
 
 #Creación del archivo y del enlace simbólico
-    sudo bash -c 'cat > /etc/nginx/sites-available/rconcan <<EOF
-        server {
-            listen 80;
-            listen [::]:80;
-            root /var/www/rocio2_web/html;
-            index index.html index.htm index.nginx-debian.html;
-            server_name rconcan2.com www.rconcan2.com;
-            location / {
-            try_files $uri $uri/ =404;
-            }
-        }
-    EOF'
+    # sudo bash -c 'cat > /etc/nginx/sites-available/rconcan2 <<EOF
+    #     server {
+    #         listen 80;
+    #         listen [::]:80;
+    #         root /var/www/rocio2_web/html;
+    #         index index.html index.htm index.nginx-debian.html;
+    #         server_name rconcan2.com www.rconcan2.com;
+    #         location / {
+    #             try_files $uri $uri/ =404;
+    #         }
+    #     }
+    # EOF'
+
+    cp /vagrant/conf/rconcan2 /etc/nginx/sites-available/rconcan2
 
  #Enlace simbólico
-    sudo ln -s /etc/nginx/sites-available/rocio2_web /etc/nginx/sites-enabled/
+    sudo ln -sf /etc/nginx/sites-available/rconcan2 /etc/nginx/sites-enabled/
 
 
+#nos aseguramos que no va mostrar la página por defecto de Nginx
+    sudo unlink /etc/nginx/sites-enabled/default
+    sudo systemctl restart nginx
 
 #CONFIGURACIÓN PARA EL SERVIDOR FTPS EN DEBIAN
 #Instalación de repositorios
