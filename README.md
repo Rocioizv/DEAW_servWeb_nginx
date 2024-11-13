@@ -3,7 +3,7 @@
 ## Descripción
 Instalación y configuración de servidor web Nginx
 
-##Primera página web
+## Primera página web
 Luego de seguir la indicaciones del pdf obtuve la primera página web, estos pasos se recogen en provision.sh y se crean en el directorio rocio_web, con un enlace simbólico llamado rconcan.
 <img src="img/img1.png" alt="PáginaWeb1"/>
 
