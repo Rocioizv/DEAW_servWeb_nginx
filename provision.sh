@@ -87,7 +87,7 @@
 #CONFIGURACIÓN PARA EL SERVIDOR FTPS EN DEBIAN
 #Instalación de repositorios
     sudo apt-get update
-    sudo apt-get install vsftpd
+    sudo apt-get -y install vsftpd
 
 
     #USUARIO
@@ -105,12 +105,15 @@
 
 
 #Creación de los certificados de seguridad
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/vsftpd.key -out /etc/ssl/certs/vsftpd.crt
+# sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/vsftpd.key -out /etc/ssl/certs/vsftpd.crt
+    cp /vagrant/conf/vsftpd.crt /etc/ssl/certs/vsftpd.crt
+    cp /vagrant/conf/vsftpd.key /etc/ssl/private/vsftpd.key
 
 #configuración del vsftpd
 cp /vagrant/conf/vsftpd.conf /etc/vsftpd.conf
 
+
 #Reinicia el servidor para aplicar la nueva configuración
-sudo systemctl restart vsftp
+sudo systemctl restart vsftpd
 
 
