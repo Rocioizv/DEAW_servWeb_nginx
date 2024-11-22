@@ -42,6 +42,7 @@ Otro caso es que le demos demasiados permisos, como el 777, y que se genere un r
 
 
 # Práctica 2.2
+Para esta práctica utilicé el directorio rocio2_web y pasé la página por FileZilla
  ## Usuarios
  <img src="img/practica2.2/userPassword.png"/>
 
