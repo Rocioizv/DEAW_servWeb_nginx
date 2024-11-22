@@ -26,7 +26,7 @@
 
 #Administrar permisos
      sudo chown -R www-data:www-data /var/www/rocio_web/html
-     sudo chmod -R 755 /var/www/rocio_web
+     sudo chmod -R 775 /var/www/rocio_web
 
 #Creación del archivo y del enlace simbólico
     # sudo bash -c 'cat > /etc/nginx/sites-available/rconcan <<EOF
@@ -58,7 +58,7 @@
 
 #Volvemos a asignar permisos esta vez al nuevo directorio
      sudo chown -R www-data:www-data /var/www/rocio2_web/html
-     sudo chmod -R 755 /var/www/rocio2_web
+     sudo chmod -R 775 /var/www/rocio2_web
 
 #Creación del archivo y del enlace simbólico
     # sudo bash -c 'cat > /etc/nginx/sites-available/rconcan2 <<EOF
